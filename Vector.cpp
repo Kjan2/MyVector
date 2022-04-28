@@ -1,5 +1,5 @@
 #include "Vector.h"
-#include <stdio.h>
+#include <iostream>
 using Value = double;
 
 Vector::Vector(const Value* rawArray, const size_t size, float coef)
@@ -213,11 +213,6 @@ void Vector::pushFront(const Value& value)
 
 void Vector::insert(const Value& value, size_t pos)
 {
-    if ((pos >= _size) ||  (_data == nullptr))
-    {
-        return;
-    }
-    
     _size++;
 
     if (_size > _capacity)
@@ -226,12 +221,12 @@ void Vector::insert(const Value& value, size_t pos)
 
         Value* newData = new Value[_capacity];
 
-        for (size_t i = 0; i < (pos + 1); i++)
+        for (size_t i = 0; i < pos; i++)
         {
             newData[i] = _data[i];
         }
         
-        for (size_t i = 1; i < (_size - pos + 1); i++)
+        for (size_t i = 0; i < (_size - pos); i++)
         {
             newData[_size - i] = _data[_size - i - 1];
         }
@@ -245,10 +240,11 @@ void Vector::insert(const Value& value, size_t pos)
 
     else
     {
-        for (size_t i = 2; i < (_size - pos + 1); i++)
+        for (size_t i = 0; i < (_size - pos); i++)
         {
-            _data[_size - i + 1] = _data[_size - i];
+            _data[_size - pos - 1 + i] = _data[pos + 1];
         }
+
         _data[pos] = value;
     }
 }
@@ -262,26 +258,31 @@ void Vector::insert(const Value* values, size_t size, size_t pos)
     while (_size > _capacity)
     {
         _capacity *= _multiplicativeCoef;
-        int allocFlag = 1;
+        allocFlag = 1;
     }
 
-    if (!allocFlag)
+
+    if (allocFlag)
     {
         Value* newData = new Value[_capacity];
 
-        for (size_t i = 0; i < (pos + 1); i++)
+        for (size_t i = 0; i < pos; i++)
         {
             newData[i] = _data[i];
         }
+
         
         for (size_t i = 1; i < (_size - pos - size  + 1); i++)
         {
             newData[_size - i] = _data[_size - i - size];
         }
 
+        size_t j = 0;
+
         for (size_t i = pos; i < (pos + size); i++)
         {
-            newData[i] = values[i];
+            newData[i] = values[j];
+            j++;
         }
 
         delete[] _data; 
@@ -291,14 +292,17 @@ void Vector::insert(const Value* values, size_t size, size_t pos)
 
     else
     {
-        for (size_t i = 2; i < (_size - pos + size + 1); i++)
+        for (size_t i = 0; i < (_size - pos - size); i++)
         {
-            _data[_size - i + 1] = _data[_size - i];
+            _data[_size - pos - 1 + i] = _data[pos + i];
         }
 
-        for (size_t i = 0; i < size; i++)
+        int j = 0;
+
+        for (size_t i = pos; i < (pos + size); i++)
         {
-            _data[i] = values[i];
+            _data[i] = values[j];
+            j++;
         }
     }
 }
@@ -306,20 +310,20 @@ void Vector::insert(const Value* values, size_t size, size_t pos)
 void Vector::insert(const Vector& vector, size_t pos)
 {
     int allocFlag = 0;
-
+    
     _size += vector.size();
 
     while (_size > _capacity)
     {
         _capacity *= _multiplicativeCoef;
-        int allocFlag = 1;
+        allocFlag = 1;
     }
 
     if (!allocFlag)
     {
         Value* newData = new Value[_capacity];
 
-        for (size_t i = 0; i < (pos + 1); i++)
+        for (size_t i = 0; i < pos; i++)
         {
             newData[i] = _data[i];
         }
@@ -329,9 +333,12 @@ void Vector::insert(const Vector& vector, size_t pos)
             newData[_size - i] = _data[_size - i - vector.size()];
         }
 
+        size_t j = 0;
+
         for (size_t i = pos; i < (pos + vector.size()); i++)
         {
-            newData[i] = vector[i];
+            newData[i] = vector[j];
+            j++;
         }
 
         delete[] _data; 
@@ -341,14 +348,17 @@ void Vector::insert(const Vector& vector, size_t pos)
 
     else
     {
-        for (size_t i = 2; i < (_size - pos + vector.size() + 1); i++)
+        for (size_t i = 0; i < (_size - pos - vector.size()); i++)
         {
-            _data[_size - i + 1] = _data[_size - i];
+            _data[_size - pos - 1 + i] = _data[pos + i];
         }
 
-        for (size_t i = 0; i < vector.size(); i++)
+        int j = 0;
+
+        for (size_t i = pos; i < (pos + vector.size()); i++)
         {
-            _data[i] = vector[i];
+            _data[i] = vector[j];
+            j++;
         }
     }
 

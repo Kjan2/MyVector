@@ -4,18 +4,26 @@
 int main()
 {
     Vector test;
-    test.pushBack(1);
-    test.pushBack(2);
-    Vector test2;
-    double array[2] = {2., 3.};
-    Vector test3;
-    test3.pushBack(1);
-    test3.insert(2, 0);
-    Vector::Iterator p = test3.begin();
-    ++p;
-    test3.reserve(10);
-   test3.shrinkToFit(); 
+    double array[] = {2, 3, 4, 5, 6};
+    test.reserve(100);
+    test.insert(array, 5, 0);
+    for (int i = 0; i < 5; i++)
+    {
+        std::cout << test[i] << std::endl;
+        //std::cout << test.capacity() << test.size();
+    }
+    
+    //test.reserve(100);
 
-    std::cout << test3.capacity() << std::endl << test3[0] << std::endl << test3.size();
+    test.insert(array, 5, 2);
+
+    for (int i = 0; i < test.size(); i++)
+    {
+        std::cout << test[i] << std::endl;
+    }
+
+    //Vector test1;
+
+    //test1.insert(test1, 0); 
     return 0;
 }
