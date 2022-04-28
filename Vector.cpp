@@ -240,9 +240,9 @@ void Vector::insert(const Value& value, size_t pos)
 
     else
     {
-        for (size_t i = 0; i < (_size - pos); i++)
+        for (size_t i = 0; i < (_size - pos - 1); i++)
         {
-            _data[_size - pos - 1 + i] = _data[pos + 1];
+            _data[_size - i - 1] = _data[_size - 2 - i];
         }
 
         _data[pos] = value;
@@ -292,9 +292,9 @@ void Vector::insert(const Value* values, size_t size, size_t pos)
 
     else
     {
-        for (size_t i = 0; i < (_size - pos - size); i++)
+        for (size_t i = 0; i < (_size - size - pos); i++)
         {
-            _data[_size - pos - 1 + i] = _data[pos + i];
+            _data[_size - i - 1] = _data[_size - size - i - 1];
         }
 
         int j = 0;
@@ -350,7 +350,7 @@ void Vector::insert(const Vector& vector, size_t pos)
     {
         for (size_t i = 0; i < (_size - pos - vector.size()); i++)
         {
-            _data[_size - pos - 1 + i] = _data[pos + i];
+            _data[_size - i - 1] = _data[_size - vector.size() - i - 1];
         }
 
         int j = 0;
