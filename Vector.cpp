@@ -166,7 +166,7 @@ void Vector::pushBack(const Value& value)
         _capacity *= _multiplicativeCoef;
         Value* newData = new Value[_capacity];
         
-        for (size_t i = 0; i < _size - 1; i++)
+        for (size_t i = 0; i < (_size - 1); i++)
         {
             newData[i] = _data[i];
         }
@@ -197,7 +197,7 @@ void Vector::pushFront(const Value& value)
 
     Value* newData = new Value[_capacity];
     
-    for (size_t i = 0; i < _size - 1; i++)
+    for (size_t i = 0; i < (_size - 1); i++)
     {
         newData[i + 1] = _data[i];
     }
@@ -226,12 +226,12 @@ void Vector::insert(const Value& value, size_t pos)
 
         Value* newData = new Value[_capacity];
 
-        for (size_t i = 0; i < pos + 1; i++)
+        for (size_t i = 0; i < (pos + 1); i++)
         {
             newData[i] = _data[i];
         }
         
-        for (size_t i = 1; i < _size - pos + 1; i++)
+        for (size_t i = 1; i < (_size - pos + 1); i++)
         {
             newData[_size - i] = _data[_size - i - 1];
         }
@@ -245,7 +245,7 @@ void Vector::insert(const Value& value, size_t pos)
 
     else
     {
-        for (size_t i = 2; i < _size - pos + 1; i++)
+        for (size_t i = 2; i < (_size - pos + 1); i++)
         {
             _data[_size - i + 1] = _data[_size - i];
         }
@@ -269,17 +269,17 @@ void Vector::insert(const Value* values, size_t size, size_t pos)
     {
         Value* newData = new Value[_capacity];
 
-        for (size_t i = 0; i < pos + 1; i++)
+        for (size_t i = 0; i < (pos + 1); i++)
         {
             newData[i] = _data[i];
         }
         
-        for (size_t i = 1; i < _size - pos - size  + 1; i++)
+        for (size_t i = 1; i < (_size - pos - size  + 1); i++)
         {
             newData[_size - i] = _data[_size - i - size];
         }
 
-        for (size_t i = pos; i < pos + size; i++)
+        for (size_t i = pos; i < (pos + size); i++)
         {
             newData[i] = values[i];
         }
@@ -291,7 +291,7 @@ void Vector::insert(const Value* values, size_t size, size_t pos)
 
     else
     {
-        for (size_t i = 2; i < _size - pos + size + 1; i++)
+        for (size_t i = 2; i < (_size - pos + size + 1); i++)
         {
             _data[_size - i + 1] = _data[_size - i];
         }
@@ -319,17 +319,17 @@ void Vector::insert(const Vector& vector, size_t pos)
     {
         Value* newData = new Value[_capacity];
 
-        for (size_t i = 0; i < pos + 1; i++)
+        for (size_t i = 0; i < (pos + 1); i++)
         {
             newData[i] = _data[i];
         }
         
-        for (size_t i = 1; i < _size - pos - vector.size() + 1; i++)
+        for (size_t i = 1; i < (_size - pos - vector.size() + 1); i++)
         {
             newData[_size - i] = _data[_size - i - vector.size()];
         }
 
-        for (size_t i = pos; i < pos + vector.size(); i++)
+        for (size_t i = pos; i < (pos + vector.size()); i++)
         {
             newData[i] = vector[i];
         }
@@ -341,7 +341,7 @@ void Vector::insert(const Vector& vector, size_t pos)
 
     else
     {
-        for (size_t i = 2; i < _size - pos + vector.size() + 1; i++)
+        for (size_t i = 2; i < (_size - pos + vector.size() + 1); i++)
         {
             _data[_size - i + 1] = _data[_size - i];
         }
@@ -361,7 +361,7 @@ void Vector::popBack()
 
 void Vector::popFront()
 {
-    for (size_t i = 0; i < _size - 1; i++)
+    for (size_t i = 0; i < (_size - 1); i++)
     {
         _data[i] = _data[i + 1];
     }
@@ -374,7 +374,7 @@ void Vector::erase(size_t pos, size_t count)
     {
         count = _size - pos;
     }
-    for (size_t i = 0; i < _size - pos - count; i++)
+    for (size_t i = 0; i < (_size - pos - count); i++)
     {   
         _data[pos + i] = _data[pos + count + i];
     }   
@@ -391,7 +391,7 @@ void Vector::eraseBetween(size_t beginPos, size_t endPos)
 
     size_t count = _size - beginPos;
 
-    for (size_t i = 0; i < _size - beginPos - count; i++)
+    for (size_t i = 0; i < (_size - beginPos - count); i++)
     {   
         _data[beginPos + i] = _data[beginPos + count + i];
     }   

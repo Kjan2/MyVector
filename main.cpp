@@ -13,7 +13,9 @@ int main()
     test3.insert(2, 0);
     Vector::Iterator p = test3.begin();
     ++p;
+    test3.reserve(10);
+   test3.shrinkToFit(); 
 
-    std::cout << *p;
+    std::cout << test3.capacity() << std::endl << test3[0] << std::endl << test3.size();
     return 0;
 }
