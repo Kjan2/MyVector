@@ -399,7 +399,7 @@ void Vector::eraseBetween(size_t beginPos, size_t endPos)
         return;
     }
 
-    size_t count = _size - beginPos;
+    size_t count = endPos - beginPos;
 
     for (size_t i = 0; i < (_size - beginPos - count); i++)
     {   
