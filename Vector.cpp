@@ -213,7 +213,14 @@ void Vector::pushFront(const Value& value)
 
         newData = nullptr;
     }
-
+    else
+    {
+        for (size_t i = 0; i < (_size - 1); i++)
+        {
+            _data[_size - i - 1] = _data[_size - 2 - i];
+            _data[0] = value;
+        }
+    }
 
 }
 
